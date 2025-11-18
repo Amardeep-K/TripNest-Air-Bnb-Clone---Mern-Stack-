@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import { connectDB } from "./config/database.config.js";
 import methodOverride from "method-override";
-import ejsmate from "ejs-mate";
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
@@ -32,9 +32,7 @@ app.use(
 );
 
 // EJS, static, parsing
-app.engine("ejs", ejsmate);
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

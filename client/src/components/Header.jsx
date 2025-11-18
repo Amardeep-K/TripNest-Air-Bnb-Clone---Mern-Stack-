@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { Dice1 } from 'lucide-react';
 const Header = () => {
   const {user, logout}=useAuth();
-  console.log("Username:",user);
+
   const handleLogout=async()=>{
     try{
       await logout();
