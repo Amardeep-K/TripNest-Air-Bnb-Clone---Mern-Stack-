@@ -9,7 +9,6 @@ A modern, responsive, and aesthetically crafted travel-stay platform inspired by
 
 ### 🔐 Authentication
 - Email + Password Login  
-- Magic Link (Passwordless Login)  
 - Google OAuth  
 - JWT Authentication using **HTTP-only Cookies**  
 - Auto-login on refresh with `/auth/me`  
@@ -57,10 +56,29 @@ A modern, responsive, and aesthetically crafted travel-stay platform inspired by
 - JWT Auth (HTTP-only cookies)  
 - Bcrypt  
 - Mapbox SDK  
-- Nodemailer (Magic Link)  
 - CORS, Cookie-parser  
 
 ---
 
 ## 📂 Folder Structure
+├── client/ # React Frontend
+│ ├── src/
+│ │ ├── components/
+│ │ ├── context/
+│ │ ├── pages/
+│ │ ├── api/
+│ │ └── App.jsx
+│ ├── public/
+│ └── index.html
+│
+└── server/ # Node Backend
+├── controllers/
+├── models/
+├── middleware/
+├── helpers/
+├── routes/
+├── utils/
+├── .env
+└── server.js
+
 
