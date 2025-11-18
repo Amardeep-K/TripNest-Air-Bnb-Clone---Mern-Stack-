@@ -1,0 +1,26 @@
+{
+  "name": "airbnb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server/app.js",
+    "client": "npm start --prefix client",
+    "start": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amardeep-K/Air-bnb-Clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Amardeep-K/Air-bnb-Clone/issues"
+  },
+  "homepage": "https://github.com/Amardeep-K/Air-bnb-Clone#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
