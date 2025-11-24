@@ -4,10 +4,8 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import { connectDB } from "./config/database.config.js";
 import methodOverride from "method-override";
-
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
 import { listingRouter } from "./routes/listing.route.js";
 import { reviewRouter } from "./routes/reviews.route.js";
 import authRouter from "./routes/auth.route.js";
@@ -25,7 +23,7 @@ const __dirname = path.dirname(__filename);
 app.use(cookieParser());
 app.use(
   cors({
-   origin: "http://localhost:5173",
+   origin: process.env.CLIENT_URL || "https://tripnesst.netlify.app/",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],

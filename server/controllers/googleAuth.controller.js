@@ -17,7 +17,7 @@
         "profile",
         "email"
       ],
-      redirect_uri: "http://localhost:3000/auth/google/callback",
+      redirect_uri: `${process.env.SERVER_URL}/auth/google/callback`,
     });
 
     res.redirect(redirectUrl);
@@ -29,7 +29,7 @@
 
       const { tokens } = await client.getToken({
         code,
-        redirect_uri: "http://localhost:3000/auth/google/callback",
+        redirect_uri: `${process.env.SERVER_URL}/auth/google/callback`,
       });
 
       const ticket = await client.verifyIdToken({

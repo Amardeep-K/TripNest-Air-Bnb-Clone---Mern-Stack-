@@ -19,6 +19,7 @@ import crypto from "crypto";
 
 export const register = async (req, res) => {
   try {
+    console.log(process.env.SERVER_URL);
     const { email, password ,username } = req.body;
 
     let existing = await User.findOne({ email });
