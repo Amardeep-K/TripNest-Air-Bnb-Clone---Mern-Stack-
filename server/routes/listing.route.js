@@ -3,7 +3,7 @@ import { wrapAsync } from "../utils/wrapAsync.js";
 import { isLoggedIn , isCreater} from "../middlewares/authentication.js";
 import { allListings, createListingForm, destroyListing, editListingForm, handleCreateListing, handleEditListing, showListing } from "../controllers/listing.controller.js";
 import { validationListingMiddleware ,validationReviewMiddleware } from "../middlewares/validate.js";
-import {upload} from "../config/cloudinary.config.js"
+// import {upload} from "../config/cloudinary.config.js"
 import { auth } from "../middlewares/authentication.js";
 
 export const listingRouter = express.Router();
