@@ -6,19 +6,44 @@ import api from "../../api/api";
 import Gallery from "./widgets/Gallery";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
+import ListingStickyHeader from "../widgets/ListingStickyHeader";
+import Map from "../widgets/Map";
+import { geocode } from "../../api/GeocodingApi";
+
+
 const ListingDetails = () => {
   const {user} = useAuth();
   const { id } = useParams(); // ✅ grab listing ID from URL
   const [listing, setListing] = useState(null);
   const [editLoading , setEditLoading]= useState(false);
+ const[location,setLocation]=useState(null);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    api
-      .get(`/${id}`) // ✅ fetch one listing
-      .then((res) => setListing(res.data))
-      .catch((err) => console.error(err));
+  useEffect( () => {
+    const fetchListing = async ()=>{
+    try{
+   const {data} = await api.get(`/${id}`) // ✅ fetch one listing
+  
+   setListing(data)
+  
+     const coordinates = await geocode(data.location);
+     if(coordinates){
+      
+       setLocation({ lat: coordinates[1], lng: coordinates[0] });
+     }
+
+    }catch(err){
+    console.error(err);
+    }
+  }
+  fetchListing();
+
   }, [id]);
+
+
+        
+
   const handleDeleteListing = async () => {
     setEditLoading(true);
   try {
@@ -40,6 +65,7 @@ const ListingDetails = () => {
 
   return (
     <>
+    <ListingStickyHeader/>
       {/* TITLE + META */}
       <div className="mb-4">
         <h1 className="text-3xl font-semibold tracking-tight">
@@ -93,8 +119,16 @@ const ListingDetails = () => {
         <BookingCard />
         
         <hr />
+       
         
       </div>
+      <div className=" flex flex-col gap-2  py-5 mt-5 shadow-xl  ">
+        <h2 className="text-xl font-semibold"> You are here</h2>
+        {location?
+        <Map lat={location.lat} lng={location.lng} />
+        :(<p> Loading....</p>)}
+      </div>
+       
     { user && user.email == listing?.admin?.email ? <div className="action-container flex gap-4 mt-4">
       <button
   onClick={() => navigate(`/${listing._id}/edit`)}

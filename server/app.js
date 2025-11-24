@@ -14,8 +14,9 @@ import authRouter from "./routes/auth.route.js";
 import { ExpressError } from "./utils/ExpressError.js";
 
 const app = express();
-const PORT = 3000;
+
 dotenv.config();
+const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +25,7 @@ const __dirname = path.dirname(__filename);
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+   origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],

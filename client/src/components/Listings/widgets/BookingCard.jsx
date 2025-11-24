@@ -22,7 +22,7 @@ const BookingCard = () => {
     
     <>
     <div className="lg:w-1/3">
-          <div className="p-6 rounded-xl bg-gray-900 border border-gray-700 shadow-xl sticky top-20">
+          <div className="p-6 rounded-xl bg-gray-900  shadow-xl sticky top-20">
             <h2 className="text-2xl font-semibold mb-3">
               ₹{listing?.price.toLocaleString("en-IN")}{" "}
               <span className="text-gray-400 text-sm">/ night</span>

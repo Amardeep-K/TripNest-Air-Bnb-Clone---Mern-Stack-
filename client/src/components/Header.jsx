@@ -17,15 +17,16 @@ const Header = () => {
 
 
   return (
-    <div className="navbar flex bg-base-100 shadow-lg  px-4">
+    <div className="navbar flex bg-base-100 shadow-lg w-full justify-center  ">
+      <div className='flex Header-container justify-between w-full   max-w-7xl'>
   <div className=" navbar-start w-50! ">
-    <Link className="btn btn-ghost text-2xl" to='/'>WanderLust</Link>
+    <Link className="btn btn-ghost text-2xl" to='/'><i className="fa-solid fa-plane-departure"></i> TripNest</Link>
   </div>
    <div className="justify-center flex-1  navbar-center hidden sm:items-center sm:flex">
    
   </div>
-   <div className="navbar-end sm:w-fit ">
-     <ul className="menu menu-horizontal text-base px-1 ">
+   <div className="navbar-end  sm:w-fit ">
+     <ul className="menu menu-horizontal hidden sm:flex text-base px-1 ">
       <li><Link to={`/`}>Home</Link></li>
          <li><Link to={`/create`}>Add your Air bnb</Link></li>
         
@@ -33,7 +34,7 @@ const Header = () => {
     </ul>
    
     { user ? (
-      <div className='flex ml-3 gap-4 items-center border-l border-gray-600 px-4'>
+      <div className='flex ml-3 gap-4 items-center sm:text-sm text-xs border-l border-gray-600 px-4'>
         <span>Welcome , {user.username}</span>
       
       {/* <button onClick={handleLogout} className=' ring-1 ring-sky-500 px-2 shadow-lg py-1  text-md rounded text-sky-500 font-medium '>Logout</button> */}
@@ -66,6 +67,7 @@ const Header = () => {
     (  <div className='flex gap-1.5'>
     <Link  className='bg-sky-500 px-2  shadow-lg py-1 rounded text-md text-black font-medium ' to="/auth/login">Login</Link>
     <Link className=' ring-1 ring-sky-500 px-2 shadow-lg py-1  text-md rounded text-sky-500 font-medium ' to="/auth/register">Sign In</Link> </div>  )}
+  </div>
   </div>
  
 </div>

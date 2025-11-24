@@ -7,8 +7,8 @@ import { User } from "../models/user.model.js";
 
 export const auth = async (req, res, next) => {
   try {
-    console.log("Verifying.... token")
-    console.log("Cookies received:", req.cookies); 
+    // console.log("Verifying.... token")
+    // console.log("Cookies received:", req.cookies); 
     const token = req.cookies.jwt;
     if (!token) return res.status(401).json({ message: "Not authenticated" });
 

@@ -26,11 +26,11 @@ import MagicLogin from "./pages/AuthenticationPages/MagicLogin.jsx";
 
 
   return (
-    <div className=" flex flex-col w-full ">
+    <div className=" flex flex-col w-full  ">
       
       <Header />
 
-      <main className="min-h-screen">
+      <main className="min-h-screen max-w-7xl mx-auto ">
         <ToastContainer
 position="top-center"
 autoClose={3000}

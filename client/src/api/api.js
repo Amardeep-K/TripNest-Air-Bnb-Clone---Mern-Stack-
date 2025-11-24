@@ -1,7 +1,7 @@
 import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:3000", // backend URL
+import { configDotenv } from "dotenv";
+export const api = axios.create({
+  baseURL: `${import.meta.env.VITE_APP_SERVER_URL}`, // backend URL
    withCredentials: true,
 });
 

@@ -7,6 +7,7 @@ const ListingCard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    
     api
       .get("/")
       .then((res) => setListings(res.data))
@@ -16,7 +17,7 @@ const ListingCard = () => {
   return (
     <>
       {listings.map((listing) => (
-        <div key={listing._id} className="card bg-gray-900 h-[25em] w-[25em] mb-8 shadow-lg">
+        <div key={listing._id} className="card bg-gray-900 h-[25em] w-[25em] mb-7 shadow-lg">
           <figure>
             <img
               className=" h-50 w-full object-cover"
