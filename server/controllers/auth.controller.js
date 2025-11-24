@@ -12,7 +12,7 @@ import crypto from "crypto";
  const cookieSettings = {
   httpOnly: true,
   secure: true,
-  sameSite: "lax",
+  sameSite: "none",
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: "/",
 };
