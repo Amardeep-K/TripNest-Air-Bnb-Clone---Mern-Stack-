@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 const Oauth = () => {
-  const GOOGLE_LOGIN_URL = "http://localhost:3000/auth/google";
+  const GOOGLE_LOGIN_URL = `${import.meta.env.VITE_APP_SERVER_URL}/auth/google`;
   const navigate = useNavigate();
   const handleClick =()=>{
    navigate('/auth/magiclink');
