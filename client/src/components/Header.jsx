@@ -54,7 +54,7 @@ const Header = () => {
         <li>
           <Link to={'/dashboard'} className="justify-between">
             Profile
-            <span className="badge">New</span>
+            {/* <span className="badge">New</span> */}
           </Link>
         </li>
          <li className='sm:hidden'><Link to={`/`}>Home</Link></li>

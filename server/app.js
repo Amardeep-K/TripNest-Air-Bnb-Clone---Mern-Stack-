@@ -23,7 +23,7 @@ const __dirname = path.dirname(__filename);
 app.use(cookieParser());
 app.use(
   cors({
-   origin: process.env.CLIENT_URL || "https://tripnesst.netlify.app",
+   origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
