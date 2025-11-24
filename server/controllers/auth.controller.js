@@ -10,11 +10,11 @@ import crypto from "crypto";
 //   return res.json({ user: req.user });
 // };
  const cookieSettings = {
- httpOnly: true,
-  secure: false,      // only true in production HTTPS
+  httpOnly: true,
+  secure: true,
   sameSite: "lax",
   maxAge: 7 * 24 * 60 * 60 * 1000,
-  path: "/",      
+  path: "/",
 };
 
 export const register = async (req, res) => {
