@@ -2,17 +2,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios';
-import Listing from './Listing.jsx';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import ListingCard from './components/Listings/ListingCard.jsx';
-import ListingDetails from './components/Listings/ListingDetails.jsx';
 import CreateListing from './components/Listings/createListing.jsx';
 import Home from './pages/Home.jsx';
 import { useAuth } from "./context/AuthContext.jsx";
 import ShowListing from './pages/ShowListing.jsx';
-import EditListing from "./components/Listings/editListing.jsx";
+import EditListing from "./components/Listings/EditListing.jsx";
 import './App.css'
 import LoginPage from "./pages/AuthenticationPages/LoginPage.jsx";
 import RegisterPage from "./pages/AuthenticationPages/RegisterPage.jsx";

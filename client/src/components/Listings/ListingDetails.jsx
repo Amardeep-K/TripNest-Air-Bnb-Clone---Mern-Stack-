@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BookingCard from "./widgets/BookingCard";
 import api from "../../api/api";
-import Gallery from "./widgets/Gallery";
 import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
 import ListingStickyHeader from "../widgets/ListingStickyHeader";
