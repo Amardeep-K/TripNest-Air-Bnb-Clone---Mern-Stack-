@@ -50,8 +50,8 @@
                   <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  md:w-xs lg:w-sm sm:w-md border p-4">
     <legend className="fieldset-legend">Login</legend>
 
-    <label className="label">Username</label>
-    <input type="email" className="input validator sm:w-full" placeholder="EMail" value={formData.username} name="email"   required   minLength={3} maxLength={30} title="Only letters, numbers or dash" onChange={handleChange} />
+    <label className="label">Email</label>
+    <input type="email" className="input validator sm:w-full" placeholder="Email" value={formData.username} name="email"   required   minLength={3} maxLength={30} title="Only letters, numbers or dash" onChange={handleChange} />
     <div className="validator-hint hidden">Enter valid Email</div>
 
     <label className="label">Password</label>
