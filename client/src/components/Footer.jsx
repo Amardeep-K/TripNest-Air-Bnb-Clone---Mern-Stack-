@@ -7,7 +7,7 @@ const Footer = () => {
       
   <aside className="grid-flow-col items-center">
     <i className="fa-solid text-lg fa-plane-departure"></i>
-    <p>Wanderlust | Copyright © {new Date().getFullYear()} - All right reserved</p>
+    <p>TripNest | Copyright © {new Date().getFullYear()} - All right reserved</p>
   </aside>
   <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
     <a>
