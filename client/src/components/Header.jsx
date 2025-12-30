@@ -17,7 +17,8 @@ const Header = () => {
 
 
   return (
-    <div className="navbar flex bg-base-100 shadow-lg w-full justify-center  ">
+    <div className="navbar flex bg-gray-900  shadow-lg w-full justify-center  ">
+
       <div className='flex Header-container justify-between w-full   max-w-7xl'>
   <div className=" navbar-start w-50! ">
     <Link className="btn btn-ghost text-2xl" to='/'><i className="fa-solid fa-plane-departure"></i> TripNest</Link>
