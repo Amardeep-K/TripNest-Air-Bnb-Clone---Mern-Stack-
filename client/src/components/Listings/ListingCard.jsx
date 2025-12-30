@@ -5,13 +5,16 @@ import api from "../../api/api";
 const ListingCard = () => {
   const [listings, setListings] = useState([]);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
+
     
     api
       .get("/")
       .then((res) => setListings(res.data))
       .catch((err) => console.error(err));
+      
   }, []);
 
   return (
