@@ -59,7 +59,7 @@ const Header = () => {
         </li>
          <li className='sm:hidden'><Link to={`/`}>Home</Link></li>
          <li className='sm:hidden' ><Link to={`/create`}>Add your Air bnb</Link></li>
-        <li><a>Settings</a></li>
+       
         <li><Link onClick={handleLogout} to="/">Logout</Link></li>
       </ul>
     </div>
