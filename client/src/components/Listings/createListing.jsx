@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../../api/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../ui/input";
 
 const CreateListing = () => {
   const navigate = useNavigate();
@@ -114,11 +115,17 @@ const CreateListing = () => {
               type="file"
               name="image"
               onChange={handleChange}
-              className="file-input file-input-info w-full"
+              className="file:h-full! file:py-2 file:px-3 
+     file:border-0
+    file:text-sm 
+    file:bg-sky-500 file:text-black
+    hover:file:bg-sky-600
+    cursor-pointer   file-input w-full p-0!"
               accept="image/*"
               
               required
   title="Must be valid URL" />
+ 
   <label className="label text-sm">Max size 2MB</label>
 <p className="validator-hint hidden">Limit Exceeded</p>
           </div>
