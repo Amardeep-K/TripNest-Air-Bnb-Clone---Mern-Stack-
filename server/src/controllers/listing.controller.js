@@ -1,7 +1,8 @@
 import { Listing } from "../models/listing.model.js";
 import { Review } from "../models/review.model.js";
 import { validationListingMiddleware ,validationReviewMiddleware } from "../middlewares/validate.js";
-import mongoose from "mongoose";
+import { storage,InputFile } from "../config/appwrite.config.js";
+
 
 export const  allListings = async (req, res) => {
   //  req.session.name="Amar";
@@ -17,21 +18,32 @@ export const createListingForm = async (req, res) => {
 export const handleCreateListing = async (req, res) => {
   try {
    
- 
+       const file = req.file;
+
+    if (!file) {
+      return res.status(400).json({ message: "Image required" });
+    }
+    const fileUpload = await storage.createFile(
+            process.env.APPWRITE_BUCKET_ID,
+            'unique()', // Let Appwrite generate an ID
+            InputFile.fromBuffer(req.file.buffer, req.file.originalname)
+        );
+    const fileUrl = `${process.env.APPWRITE_ENDPOINT}/storage/buckets/${process.env.APPWRITE_BUCKET_ID}/files/${fileUpload.$id}/view?project=${process.env.APPWRITE_PROJECT_ID}`;
 
     // Extract fields directly from req.body (not nested)
     const {listing} = req.body;
     
     const newListing = new Listing({
       title: listing.title,
-      image:{
-        filename: "listingimage",
-        url: listing.image.url
+      image: {
+        url: fileUrl,
+        fileId: fileUpload.$id,
       },
       description: listing.description,
       price: listing.price, 
       location: listing.location,
       country: listing.country,
+      admin:req.user._id
 
       
     });

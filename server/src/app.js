@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import { connectDB } from "./config/database.config.js";
+
 import methodOverride from "method-override";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -13,8 +13,7 @@ import { ExpressError } from "./utils/ExpressError.js";
 
 const app = express();
 
-dotenv.config();
-const PORT = process.env.PORT || 3000;
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,7 +56,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  connectDB();
-});
+
+
+export default app;
