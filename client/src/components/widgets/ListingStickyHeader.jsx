@@ -29,7 +29,7 @@ useEffect(() => {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 sm:top-0 sm:left-0 w-full transition-all duration-300 z-50 
+      className={`fixed h-fit bg-sky-500 bottom-0 left-0 sm:top-0 sm:left-0 w-full transition-all duration-300 z-9
         ${showHeader ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10 pointer-events-none"}
       `}
     >

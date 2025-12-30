@@ -7,7 +7,7 @@ const CreateListing = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
-    image: "",
+    image: null,
     description: "",
     price: "",
     location: "",
@@ -15,10 +15,18 @@ const CreateListing = () => {
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+   const { name, type, files, value } = e.target;
+
+  if (type === "file") {
+    const selectedFile = files[0];
+    setFormData({ ...formData, image: selectedFile });
+
+    // Create a temporary URL for the preview
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl); 
+  } else {
+    setFormData({ ...formData, [name]: value });
+  }
   };
 
   const handleSubmit = async (e) => {
@@ -31,13 +39,16 @@ const CreateListing = () => {
         price: formData.price,
         location: formData.location,
         country: formData.country,
-        image: { url: formData.image },
+        image: formData.image,
       },
     };
 
     try {
       const res = await api.post("/create", payload, {
         withCredentials: true,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
       });
 
       toast.success(res.data.message || "Listing created successfully!");
@@ -96,18 +107,20 @@ const CreateListing = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="label">
-              <span className="label-text text-lg">Image URL</span>
+              <span className="label-text text-lg">Image </span>
+              
             </label>
             <input
-              type="url"
+              type="file"
               name="image"
-              value={formData.image}
               onChange={handleChange}
-              className="input input-bordered w-full"
-              placeholder="Enter image URL"
+              className="file-input file-input-info w-full"
+              accept="image/*"
+              
               required
   title="Must be valid URL" />
-<p className="validator-hint hidden">Must be valid URL</p>
+  <label className="label text-sm">Max size 2MB</label>
+<p className="validator-hint hidden">Limit Exceeded</p>
           </div>
 
           <div>
