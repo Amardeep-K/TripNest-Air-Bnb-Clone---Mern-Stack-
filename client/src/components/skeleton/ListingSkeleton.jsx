@@ -1,6 +1,6 @@
 const ListingSkeleton = () => {
   return (
-    <div className="card bg-gray-900 h-[25em] w-[25em] mb-7 shadow-lg overflow-hidden animate-pulse">
+    <div className="card  bg-gray-900 h-[25em] w-[25em] mb-7 shadow-lg overflow-hidden animate-pulse">
       {/* Image Skeleton */}
       <div className="h-48 w-full bg-gray-800"></div>
 

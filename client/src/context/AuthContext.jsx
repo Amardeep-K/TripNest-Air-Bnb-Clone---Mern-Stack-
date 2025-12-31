@@ -35,6 +35,10 @@ export const AuthProvider = ({ children }) => {
     return res;
 
   },[]);
+  const showListing = useCallback(async(id)=>{
+    const res = await api.get( `/${id}`)
+    return res;
+  })
 
   const googleLogin = () => {
     window.location.href = "http://localhost:3000/api/auth/google";
@@ -48,6 +52,7 @@ export const AuthProvider = ({ children }) => {
       logout,
       googleLogin,
       getListing,
+      showListing,
       loading,
       setLoading
     }}>

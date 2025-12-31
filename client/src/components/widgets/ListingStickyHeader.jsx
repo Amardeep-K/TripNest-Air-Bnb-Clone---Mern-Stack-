@@ -34,7 +34,7 @@ useEffect(() => {
       `}
     >
       <div className="bg-gray-900 text-white  text-sm  p-4 shadow-lg flex justify-between items-center">
-       <div className="flex gap-4 items-center"> <span className="flex gap-2 items-center">  <i class="fa-solid fa-earth-americas"></i>  {listing?.location}</span> |  <span>{listing?.country}    </span> </div>
+       <div className="flex gap-4 items-center"> <span className="flex gap-2 items-center">  <i className="fa-solid fa-earth-americas"></i>  {listing?.location}</span> |  <span>{listing?.country}    </span> </div>
         <div className=" flex gap-4  justify-center items-center"> <h2 className=" text-xs sm:text-2xl font-semibold ">
               ₹{listing?.price.toLocaleString("en-IN")}{" "}
               <span className="text-gray-400 sm:text-sm">/ night</span>

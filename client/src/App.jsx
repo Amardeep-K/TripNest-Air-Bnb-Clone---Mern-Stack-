@@ -26,7 +26,7 @@ import MagicLogin from "./pages/AuthenticationPages/MagicLogin.jsx";
       
       <Header />
 
-      <main className="min-h-screen max-w-7xl mx-auto ">
+      <main className="min-h-screen  ">
         <ToastContainer
 position="top-center"
 autoClose={3000}
