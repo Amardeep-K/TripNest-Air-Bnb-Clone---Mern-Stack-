@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState, useContext,useCallback } from "react";
 import api from "../api/api";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading,setLoading]=useState(false);
 
   // Check login status on refresh
   useEffect(() => {
@@ -29,6 +30,11 @@ export const AuthProvider = ({ children }) => {
     await api.get("/auth/logout");
     setUser(null);
   };
+  const getListing = useCallback(async ()=>{
+    const res=await api.get("/");
+    return res;
+
+  },[]);
 
   const googleLogin = () => {
     window.location.href = "http://localhost:3000/api/auth/google";
@@ -41,8 +47,12 @@ export const AuthProvider = ({ children }) => {
       register,
       logout,
       googleLogin,
+      getListing,
+      loading,
+      setLoading
     }}>
       {children}
+      {/* {loading && ( )} */}
     </AuthContext.Provider>
   );
 };

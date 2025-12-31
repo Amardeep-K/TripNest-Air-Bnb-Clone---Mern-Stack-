@@ -1,24 +1,39 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
+import { useAuth } from "@/context/AuthContext";
+import ListingSkeleton from "../skeleton/ListingSkeleton";
 
 const ListingCard = () => {
+  const{getListing}=useAuth();
+   const {loading,setLoading}= useAuth();
   const [listings, setListings] = useState([]);
   const navigate = useNavigate();
   
 
   useEffect(() => {
 
-    
-    api
-      .get("/")
-      .then((res) => setListings(res.data))
-      .catch((err) => console.error(err));
+    const fetch = async()=>{
+      try{
+        setLoading(true)
+      const response = await getListing();
+      console.log("Response:",response)
+      setListings(response.data)
       
-  }, []);
+      }catch(error){
+        console.log("Error",error);
+      }finally{
+        setLoading(false)
+      }
+    }
+    fetch();
+    
+      
+  }, [getListing,setLoading]);
 
   return (
     <>
+      {loading && ([...Array(6)].map((_,idx)=>(<ListingSkeleton key={idx}/>)))}
       {listings.map((listing) => (
         <div key={listing._id} className="card bg-gray-900 h-[25em] w-[25em] mb-7 shadow-lg">
           <figure>
@@ -38,7 +53,7 @@ const ListingCard = () => {
             <p className="font-lighter text-gray-400 text-justify">{listing.description}</p>
 
             <div className="card-actions flex items-center justify-between">
-              <span className="badge badge-info w-20  text-xs  badge-outline">
+              <span className="badge badge-info w-20  text-sm  badge-outline">
                 ₹ {listing.price.toLocaleString("en-IN")}
               </span>
               <button
