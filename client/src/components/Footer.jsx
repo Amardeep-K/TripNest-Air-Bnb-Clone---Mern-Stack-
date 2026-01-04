@@ -2,8 +2,8 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='footer-container bg-gray-900 flex justify-center'>
-    <footer className="footer sm:footer-horizontal text-[0.5rem] sm:text-xs font-medium w-full  justify-between  max-w-7xl  flex sm:justify-between  p-4 sm:p-4">
+    <div className='footer-container bg-sky-500 dark:bg-gray-900 flex justify-center'>
+    <footer className=" text-white footer sm:footer-horizontal text-[0.5rem] sm:text-xs font-medium w-full  justify-between  max-w-7xl  flex sm:justify-between  p-4 sm:p-4">
       
   <aside className="grid-flow-col items-center">
     <i className="fa-solid text-lg fa-plane-departure"></i>

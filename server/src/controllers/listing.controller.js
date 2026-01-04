@@ -116,14 +116,20 @@ export const handleCreateListing = async (req, res) => {
    }
 export const handleEditListing = async (req, res) => {
     const {id} = req.params;
+    const fileUpload = await storage.createFile(
+            process.env.APPWRITE_BUCKET_ID,
+            'unique()', // Let Appwrite generate an ID
+            InputFile.fromBuffer(req.file.buffer, req.file.originalname)
+        );
+    const fileUrl = `${process.env.APPWRITE_ENDPOINT}/storage/buckets/${process.env.APPWRITE_BUCKET_ID}/files/${fileUpload.$id}/view?project=${process.env.APPWRITE_PROJECT_ID}`;
+   
     const Elisting = await Listing.findByIdAndUpdate(id , {...req.body.listing});
     console.log(req.file);
     if (req.file){ 
           Elisting.image = {
-            url: req.file.path,
-            filename: req.file.filename,
-            
-          };}
+        url: fileUrl,
+        fileId: fileUpload.$id,
+      };}
           await Elisting.save();
     //  req.flash("edited", "Listing edited successfully!");
     res.json({ success: true, message: "Listing edited!" });

@@ -1,67 +1,85 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/api";
 import { useAuth } from "@/context/AuthContext";
 import ListingSkeleton from "../skeleton/ListingSkeleton";
 
 const ListingCard = () => {
-  const { getListing } = useAuth();
-  const { loading, setLoading } = useAuth();
+  const { getListing, loading, setLoading } = useAuth();
   const [listings, setListings] = useState([]);
   const navigate = useNavigate();
 
-
   useEffect(() => {
-
-    const fetch = async () => {
+    const fetchListings = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await getListing();
-        setListings(response.data)
-
+        setListings(response.data);
       } catch (error) {
-        console.log("Error", error);
+        console.error("Error fetching listings", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    fetch();
+    };
 
-
+    fetchListings();
   }, [getListing, setLoading]);
+
+  if (loading) {
+    return (
+      <>
+        {[...Array(6)].map((_, idx) => (
+          <ListingSkeleton key={idx} />
+        ))}
+      </>
+    );
+  }
 
   return (
     <>
-      {loading && ([...Array(6)].map((_, idx) => (<ListingSkeleton key={idx} />)))}
       {listings.map((listing) => (
-        <div key={listing._id} className="card bg-gray-900 h-[25em] w-[25em] mb-7 shadow-lg">
-          <figure>
+        <div
+          key={listing._id}
+          className="
+            w-[25em] h-[25em] mb-7 rounded-xl overflow-hidden
+            bg-white dark:bg-neutral-900
+            shadow-md hover:shadow-xl transition
+            border border-gray-200 dark:border-gray-800
+            card
+          "
+        >
+          {/* IMAGE */}
+          <figure className="h-48 w-full overflow-hidden">
             <img
-              className=" h-50 w-full object-cover"
-              src={listing.image.url}
+              src={listing?.image?.url}
               alt={listing.title}
+              className="h-full w-full object-cover hover:scale-105 transition-transform duration-300"
             />
           </figure>
 
-          <div className="card-body flex flex-col justify-center items-">
-            <h2 className="card-title font-medium text-2lg">
+          {/* BODY */}
+          <div className="card-body flex flex-col justify-center ">
+            <h2 className="font-semibold text-lg text-gray-900 dark:text-gray-100 line-clamp-1">
               {listing.title}
-
             </h2>
 
-            <p className="font-lighter text-gray-400 text-justify">{listing.description}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+              {listing.description}
+            </p>
 
             <div className="card-actions flex items-center justify-between">
-              <span className="badge badge-info w-20  text-sm  badge-outline">
-                ₹ {listing.price.toLocaleString("en-IN")}
-              </span>
+              <span className="badge badge-info w-20 text-sm badge-outline"> ₹ {listing.price.toLocaleString("en-IN")} </span>
+
               <button
                 onClick={() => navigate(`/${listing._id}`)}
-                className="btn rounded-full font-medium  text-sm bg-sky-500 text-black hover:bg-sky-600 hover:shadow-lg"
+                className="
+                  px-4 py-2 rounded-full text-sm font-medium
+                  bg-sky-500 text-white
+                  hover:bg-sky-600
+                  transition shadow-sm hover:shadow-md
+                "
               >
                 Book Now
               </button>
-
             </div>
           </div>
         </div>

@@ -2,8 +2,17 @@ import {useState} from 'react'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { Dice1 } from 'lucide-react';
+import { FaMoon } from "react-icons/fa";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { toggleTheme } from '@/store/slice/themeSlice.js';
 const Header = () => {
+  const dispatch = useDispatch();
+  const {mode}= useSelector((store)=>(store.theme))
   const {user, logout}=useAuth();
+  console.log("Mode:",mode)
+
 
   const handleLogout=async()=>{
     try{
@@ -17,25 +26,30 @@ const Header = () => {
 
 
   return (
-    <div className="navbar flex bg-gray-900  shadow-lg w-full justify-center  ">
+    <div className="navbar flex bg-sky-500 dark:bg-gray-900  shadow-lg w-full justify-center  ">
 
       <div className='flex Header-container justify-between w-full   max-w-7xl'>
   <div className=" navbar-start w-50! ">
-    <Link className="btn btn-ghost text-2xl" to='/'><i className="fa-solid fa-plane-departure"></i> TripNest</Link>
+    <Link className="btn btn-ghost text-2xl text-white" to='/'><i className="fa-solid fa-plane-departure"></i> TripNest</Link>
   </div>
    <div className="justify-center flex-1  navbar-center hidden sm:items-center sm:flex">
    
   </div>
    <div className="navbar-end  sm:w-fit ">
-     <ul className="menu menu-horizontal hidden sm:flex text-base px-1 ">
+     <ul className="menu menu-horizontal hidden sm:flex text-white px-1 ">
       <li><Link to={`/`}>Home</Link></li>
          <li><Link to={`/create`}>Add your Air bnb</Link></li>
         
       
     </ul>
+    <button className='m-5  text-white  text-lg rounded cursor-pointer' onClick={ 
+      ()=>{
+      dispatch(toggleTheme());
+      }
+    }>{mode ==="dark"?(<FaMoon />):(<MdOutlineWbSunny />)}</button>
    
     { user ? (
-      <div className='flex ml-3 gap-4 items-center sm:text-sm text-xs border-l border-gray-600 px-4'>
+      <div className='flex ml-3 gap-4 items-center sm:text-sm text-xs border-l text-white border-gray-600 px-4'>
         <span>Welcome , {user.username}</span>
       
       {/* <button onClick={handleLogout} className=' ring-1 ring-sky-500 px-2 shadow-lg py-1  text-md rounded text-sky-500 font-medium '>Logout</button> */}
@@ -68,8 +82,8 @@ const Header = () => {
       </div>
      ):
     (  <div className='flex gap-1.5'>
-    <Link  className='bg-sky-500 px-2  shadow-lg py-1 rounded text-md text-black font-medium ' to="/auth/login">Login</Link>
-    <Link className=' ring-1 ring-sky-500 px-2 shadow-lg py-1  text-md rounded text-sky-500 font-medium ' to="/auth/register">Sign In</Link> </div>  )}
+    <Link  className='bg-sky-500 px-2 ring-1 dark:ring-sky-500 ring-white shadow-lg py-1 rounded text-md text-white dark:text-black font-medium ' to="/auth/login">Login</Link>
+    <Link className=' ring-1  ring-white dark:ring-sky-500 px-2 shadow-lg py-1  text-md rounded text-white dark:text-sky-500 font-medium ' to="/auth/register">Sign In</Link> </div>  )}
   </div>
   </div>
  

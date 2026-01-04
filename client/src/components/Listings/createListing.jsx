@@ -6,6 +6,7 @@ import { Input } from "../ui/input";
 
 const CreateListing = () => {
   const navigate = useNavigate();
+  const [preview,setPreview]=useState(null)
   const [formData, setFormData] = useState({
     title: "",
     image: null,
@@ -16,18 +17,19 @@ const CreateListing = () => {
   });
 
   const handleChange = (e) => {
-   const { name, type, files, value } = e.target;
+    const { name, type, files, value } = e.target;
 
-  if (type === "file") {
-    const selectedFile = files[0];
-    setFormData({ ...formData, image: selectedFile });
+    if (type === "file") {
+      const selectedFile = files[0];
+      setFormData({ ...formData, image: selectedFile });
 
-    // Create a temporary URL for the preview
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl); 
-  } else {
-    setFormData({ ...formData, [name]: value });
-  }
+      // Create a temporary URL for the preview
+      const objectUrl = URL.createObjectURL(selectedFile);
+      setPreview(objectUrl);
+      
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,14 +50,12 @@ const CreateListing = () => {
       const res = await api.post("/create", payload, {
         withCredentials: true,
         headers: {
-          'Content-Type': 'multipart/form-data',
-        }
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       toast.success(res.data.message || "Listing created successfully!");
-      navigate('/');
-
-     
+      navigate("/");
     } catch (err) {
       console.error("Error:", err);
       toast.error(err.response?.data?.message || "Something went wrong!");
@@ -63,11 +63,10 @@ const CreateListing = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-10 p-6 bg-gray-900 rounded-xl shadow-md">
+    <div className="max-w-3xl mx-auto my-10 p-6   bg-white dark:bg-neutral-900 rounded-xl shadow-md">
       <h2 className="text-3xl font-bold mb-6">Create a Listing</h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        
         {/* Title */}
         <div>
           <label className="label">
@@ -76,7 +75,7 @@ const CreateListing = () => {
           <input
             type="text"
             name="title"
-            className="input validator input-bordered w-full"
+            className="input validator input-bordered w-full bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300 "
             placeholder="Enter listing title"
             required
             minLength={5}
@@ -93,7 +92,7 @@ const CreateListing = () => {
           </label>
           <textarea
             name="description"
-            className="textarea validator textarea-bordered w-full"
+            className="textarea validator textarea-bordered w-full  bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300"
             placeholder="Describe your listing"
             required
             rows="4"
@@ -101,7 +100,7 @@ const CreateListing = () => {
             value={formData.description}
             onChange={handleChange}
           ></textarea>
-           <div className="validator-hint hidden">Enter valid Description</div>
+          <div className="validator-hint hidden">Enter valid Description</div>
         </div>
 
         {/* Image + Price */}
@@ -109,26 +108,35 @@ const CreateListing = () => {
           <div>
             <label className="label">
               <span className="label-text text-lg">Image </span>
-              
             </label>
+            {preview && (
+              <img
+                src={preview}
+                alt="Preview"
+                className="my-2 h-40 w-40 rounded-lg object-cover"
+              />
+            )}
             <input
               type="file"
               name="image"
               onChange={handleChange}
               className="file:h-full! file:py-2 file:px-3 
-     file:border-0
-    file:text-sm 
-    file:bg-sky-500 file:text-black
-    hover:file:bg-sky-600
-    cursor-pointer   file-input w-full p-0!"
-              accept="image/*"
-              
+              file:border-0
+              file:text-sm 
+              file:bg-sky-500 dark:file:text-black
+              hover:file:bg-sky-600
+              cursor-pointer   file-input w-full p-0! 
+              bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300"
+                        accept="image/*"
               required
-  title="Must be valid URL" />
- 
-  <label className="label text-sm">Max size 2MB</label>
-<p className="validator-hint hidden">Limit Exceeded</p>
+              title="Must be valid URL"
+            />
+             
+
+            <label className="label text-sm">Max size 2MB</label>
+            <p className="validator-hint hidden">Limit Exceeded</p>
           </div>
+          
 
           <div>
             <label className="label">
@@ -137,14 +145,17 @@ const CreateListing = () => {
             <input
               type="number"
               name="price"
-              className="input validator input-bordered w-full"
+              className="input validator input-bordered w-full  bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300"
               placeholder="Enter price"
-              min="1" max="100000"
+              min="1"
+              max="100000"
               required
               value={formData.price}
               onChange={handleChange}
             />
-            <p className="validator-hint hidden">Must be between be ₹1 to ₹100000</p>
+            <p className="validator-hint hidden">
+              Must be between be ₹1 to ₹100000
+            </p>
           </div>
         </div>
 
@@ -157,14 +168,14 @@ const CreateListing = () => {
             <input
               type="text"
               name="location"
-              className="input validator input-bordered w-full"
+              className="input validator input-bordered w-full  bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300"
               placeholder="City, State"
               required
               min={3}
               value={formData.location}
               onChange={handleChange}
             />
-             <p className="validator-hint hidden"> Enter valid Location</p>
+            <p className="validator-hint hidden"> Enter valid Location</p>
           </div>
 
           <div>
@@ -174,19 +185,19 @@ const CreateListing = () => {
             <input
               type="text"
               name="country"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full  bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300"
               placeholder="Enter country"
               required
               value={formData.country}
               onChange={handleChange}
             />
-             <p className="validator-hint hidden">Enter Country Name</p>
+            <p className="validator-hint hidden">Enter Country Name</p>
           </div>
         </div>
 
         <button
           type="submit"
-          className="btn bg-sky-500 hover:bg-sky-600 text-black w-fit"
+          className="btn bg-sky-500 hover:bg-sky-600 dark:text-black w-fit border-none"
         >
           ADD +
         </button>

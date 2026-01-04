@@ -16,9 +16,26 @@ import RegisterPage from "./pages/AuthenticationPages/RegisterPage.jsx";
 import MagicLinkPage from "./pages/AuthenticationPages/MagicLinkPage.jsx";
 import Dashboard from "./pages/AuthenticationPages/Dashboard.jsx";
 import MagicLogin from "./pages/AuthenticationPages/MagicLogin.jsx";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
 
  export default function App () {
+  const {mode}= useSelector((store)=>store.theme)
+  
+  
   const {user}=useAuth();
+  useEffect(()=>{
+    const root = window.document.documentElement;
+    
+    // 1. Remove both possible themes first to avoid having both classes at once
+    root.classList.remove('light', 'dark');
+    
+    // 2. Add the current mode
+    root.classList.add(mode);
+    
+  },[mode])
 
 
   return (

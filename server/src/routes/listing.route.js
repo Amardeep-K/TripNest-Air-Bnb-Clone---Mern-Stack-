@@ -33,7 +33,7 @@ export const listingRouter = express.Router();
               .get(wrapAsync(showListing))
 
               // Route to handle the update form submission
-              .put( auth, wrapAsync( handleEditListing))
+              .put( auth,upload.single("listing[image]"), wrapAsync( handleEditListing))
               // upload.single("listing[image]")
               // isCreater,
 
