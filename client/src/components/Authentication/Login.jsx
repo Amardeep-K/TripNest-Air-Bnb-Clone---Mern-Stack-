@@ -47,15 +47,15 @@
     return (
       <div>
           <form onSubmit={handleSubmit}>
-                  <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  md:w-xs lg:w-sm sm:w-md border p-4">
-    <legend className="fieldset-legend">Login</legend>
+                  <fieldset className="fieldset bg-white dark:bg-neutral-900 text-black dark:text-white dark:border-base-300 rounded-box  md:w-xs lg:w-sm sm:w-md border p-4">
+    <legend className="fieldset-legend dark:text-amber-50 text-black">Login</legend>
 
     <label className="label">Email</label>
-    <input type="email" className="input validator sm:w-full" placeholder="Email" value={formData.username} name="email"   required   minLength={3} maxLength={30} title="Only letters, numbers or dash" onChange={handleChange} />
+    <input type="email" className="input validator sm:w-full  bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300 " placeholder="Email" value={formData.username} name="email"   required   minLength={3} maxLength={30} title="Only letters, numbers or dash" onChange={handleChange} />
     <div className="validator-hint hidden">Enter valid Email</div>
 
     <label className="label">Password</label>
-    <input type="password" name='password' className="input validator sm:w-full" value={formData.password} placeholder="Password"  minLength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+    <input type="password" name='password' className="input validator sm:w-full text-black dark:text-white bg-white dark:bg-neutral-900  border dark:border-base-300 border-gray-300" value={formData.password} placeholder="Password"  minLength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
     title="Must be more than 8 characters, including number, lowercase letter, uppercase letter" onChange={handleChange}  />
     <p className="validator-hint hidden">
     Must be more than 8 characters, including
